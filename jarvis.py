@@ -42,7 +42,7 @@ def main():
         if query == "":
             continue
 
-        # --- 1. EXIT (Sabse upar rakha hai taaki instant response mile) ---
+        # --- 1. EXIT ---
         if any(word in query for word in ["exit", "stop", "bye", "quit", "offline"]):
             speak("Goodbye boss! Now systems are offline.")
             # sys.exit() direct program ko kill kar dega
@@ -97,7 +97,7 @@ def main():
         # --- WIKIPEDIA FEATURE ---
         elif "wikipedia" in query:
             speak("Searching Wikipedia...")
-            # 'wikipedia' word ko query se hata dete hain taaki sirf topic bache
+            
             query = query.replace("wikipedia", "").strip()
             try:
                 # Sirf 2 sentences ki summary nikalega
@@ -109,7 +109,7 @@ def main():
 
         # --- LOCATION FEATURE ---
         elif "where is" in query or "location of" in query:
-            # Query se 'where is' hata kar sirf jagah ka naam nikalna
+            
             place = query.replace("where is", "").replace("location of", "").strip()
             if place:
                 speak(f"Locating {place} on Google Maps, boss.")
@@ -154,8 +154,9 @@ if __name__ == "__main__":
     try:
         main()
     except SystemExit:
-        # Jab sys.exit() call hota hai toh ye handle karta hai
+    
         pass
     except KeyboardInterrupt:
         print("\nForcefully stopped.")
+
         sys.exit()
